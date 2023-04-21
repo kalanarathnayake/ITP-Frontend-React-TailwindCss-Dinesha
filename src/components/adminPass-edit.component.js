@@ -102,32 +102,33 @@ export default class EditPass extends Component {
             toStation: this.state.toStation,
             createdDate: this.state.createdDate,
         }
+        console.log(pass);
         //Validations
         if (this.state.firstName.length < 4) {
             this.setState({ firstNameError: "FirstName is too short" })
         }
-        if (this.state.lastName.length < 4) {
+        else if (this.state.lastName.length < 4) {
             this.setState({ lastNameError: "LastName is too short" })
         }
-        if (this.state.nic.length < 9) {
+        else if (this.state.nic.length < 9) {
             this.setState({ nicError: "NIC is too short" })
         }
-        if (this.state.validMonths.length < 4) {
+        else if (this.state.validMonths.length < 4) {
             this.setState({ validMonthsError: "Valid Months is too short" })
         }
-        if (this.state.trainClass.length < 4) {
+        else if (this.state.trainClass.length < 4) {
             this.setState({ trainClassError: "Train Class name is too short" })
         }
-        if (this.state.fromStation.length < 4) {
-            this.setState({ fromStationError: "fromStation is too short" })
+        else if (this.state.fromStation.length < 4) {
+            this.setState({ fromStationError: "From Station is too short" })
         }
-        if (this.state.toStation.length < 4) {
+        else if (this.state.toStation.length < 4) {
             this.setState({ toStationError: "Station name is too short" })
         }
-        if (this.state.createdDate.length < 4) {
-            this.setState({ createdDateError: "Station name is too short" })
-        }
-        console.log(pass);
+        else if (this.state.createdDate.length < 4) {
+            this.setState({ createdDateError: "Created Date is too short" })
+        }else{
+        
         console.log(this.props.passId);
         axios.put('http://localhost:5000/pass/' + this.props.passId, pass)
             .then(res => {
@@ -155,6 +156,7 @@ export default class EditPass extends Component {
                     })
                 }
             })
+        }
     }
 
     render() {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import jsPDF from 'jspdf';
+import Swal from "sweetalert2";
 import 'jspdf-autotable';
 import { Modal } from "react-bootstrap";
 import EditPass from './customerPass-edit.component';
@@ -91,7 +92,7 @@ export class CusPassList extends Component {
         this.state = {
             id: "",
             pass: [],
-            searchPass: "",
+            searchPass: "975743080V",
             show: false
         };
     }
@@ -126,12 +127,33 @@ export class CusPassList extends Component {
 
     deletePass(id) {
         axios.delete('http://localhost:5000/pass/' + id)
-            .then(res => {
-                console.log(res);
-                alert("Pass Deleted");
-            });
-        this.setState({
-            pass: this.state.pass.filter(el => el._id !== id)
+        .then(response => {
+            console.log(response.status)
+            // this.refreshTable();
+
+            if (response.status == 200) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successful',
+                    text: "Season Pass has been deleted!!",
+                    background: '#fff',
+                    confirmButtonColor: '#0a5bf2',
+                    iconColor: '#60e004'
+                })
+
+                this.refreshTable();
+            }
+
+            else {
+                Swal.fire({
+                    icon: 'Unsuccess',
+                    title: 'Unsuccessfull',
+                    text: "Employee has not been deleted!!",
+                    background: '#fff',
+                    confirmButtonColor: '#eb220c',
+                    iconColor: '#60e004'
+                })
+            }
         })
     }
 
@@ -204,23 +226,9 @@ export class CusPassList extends Component {
                                     <div class="">
                                         <button className='items-center px-2 py-2 ml-2 text-sm font-medium text-white duration-100 bg-red-500 rounded-full shadow-lg shadow-black hover:bg-red-200'
                                             onClick={() => {
+                                                
                                                 //Delete the selected record
-                                                axios.delete("http://localhost:5000/pass/" + currentPass._id)
-                                                    .then(() => {
-                                                        alert("Pass Remove Success");
-                                                        //Get data again after delete
-                                                        axios.get("http://localhost:5000/pass")
-                                                            .then((res) => {
-                                                                console.log(res.data);
-                                                                this.setState({
-                                                                    pass: res.data,
-                                                                });
-                                                            })
-                                                            .catch((err) => console.log(err));
-                                                    })
-                                                    .catch((err) => {
-                                                        alert(err);
-                                                    });
+                                                this.deletePass(currentPass._id)
                                             }}
                                         >
                                             <div class="ml-2">
@@ -314,7 +322,7 @@ export class CusPassList extends Component {
                                                 </button>
                                             </div>
                                             <div class="flex justify-end sm:flex-row sm:text-left sm:justify-end">
-                                                <input
+                                                {/* <input
                                                     className="form-control rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
                                                     type="text"
                                                     placeholder="Search by NIC"
@@ -324,7 +332,7 @@ export class CusPassList extends Component {
                                                             searchPass: e.target.value
                                                         });
                                                     }}
-                                                />
+                                                /> */}
                                             </div>
                                         </td>
                                     </tr>

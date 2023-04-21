@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Swal from "sweetalert2";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Modal } from "react-bootstrap";
@@ -90,12 +91,39 @@ export class PassList extends Component {
 
     deletePass(id) {
         axios.delete('http://localhost:5000/pass/' + id)
-            .then(res => {
-                console.log(res);
-                alert("Pass Deleted");
-            });
-        this.setState({
-            pass: this.state.pass.filter(el => el._id !== id)
+        //     .then(res => {
+        //         console.log(res);
+        //         alert("Pass Deleted");
+        //     });
+        // this.setState({
+        //     pass: this.state.pass.filter(el => el._id !== id)
+        .then(response => {
+            console.log(response.status)
+            // this.refreshTable();
+
+            if (response.status == 200) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successful',
+                    text: "Season Pass has been deleted!!",
+                    background: '#fff',
+                    confirmButtonColor: '#0a5bf2',
+                    iconColor: '#60e004'
+                })
+
+                this.refreshTable();
+            }
+
+            else {
+                Swal.fire({
+                    icon: 'Unsuccess',
+                    title: 'Unsuccessfull',
+                    text: "Employee has not been deleted!!",
+                    background: '#fff',
+                    confirmButtonColor: '#eb220c',
+                    iconColor: '#60e004'
+                })
+            }
         })
     }
 
@@ -148,25 +176,7 @@ export class PassList extends Component {
                                         <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-red-500 rounded-md hover:bg-red-200'
                                             onClick={() => {
                                                 //Delete the selected record
-                                                axios
-                                                    .delete(
-                                                        "http://localhost:5000/pass/" + currentPass._id
-                                                    )
-                                                    .then(() => {
-                                                        alert("Pass Remove Success");
-                                                        //Get data again after delete
-                                                        axios.get("http://localhost:5000/pass")
-                                                            .then((res) => {
-                                                                console.log(res.data);
-                                                                this.setState({
-                                                                    pass: res.data,
-                                                                });
-                                                            })
-                                                            .catch((err) => console.log(err));
-                                                    })
-                                                    .catch((err) => {
-                                                        alert(err);
-                                                    });
+                                               this.deletePass(currentPass._id)
                                             }}
                                         >
                                             <div class="">
