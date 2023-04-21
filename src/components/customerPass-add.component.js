@@ -169,8 +169,8 @@ export class CreatePass extends Component {
                                                         className="form-control "
                                                         value={this.state.firstName}
                                                         onChange={this.onChangeFirstName}
-                                                    /><p />
-                                                </div><p className="validateMsg">{this.state.firstNameError}</p>
+                                                    /><p className="font-bold text-red-600 validateMsg">{this.state.firstNameError}</p>
+                                                </div>
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Last Name : </label>
                                                     <input type="text"
@@ -179,8 +179,8 @@ export class CreatePass extends Component {
                                                         className="form-control"
                                                         value={this.state.lastName}
                                                         onChange={this.onChangeLastName}
-                                                    /><p />
-                                                </div><p className="validateMsg">{this.state.lastNameError}</p>
+                                                    /><p className="font-bold text-red-600 validateMsg">{this.state.lastNameError}</p>
+                                                </div>
                                             </div>
                                             <div className="grid grid-cols-2 gap-4 form-group">
                                                 <div class="">
@@ -193,16 +193,16 @@ export class CreatePass extends Component {
                                                             value={this.state.nic}
                                                             onChange={this.onChangeNic}
                                                         /><p />
-                                                    </div>
-                                                </div><p className="validateMsg">{this.state.nicError}</p>
+                                                    </div><p className="font-bold text-red-600 validateMsg">{this.state.nicError}</p>
+                                                </div>
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Created Date : </label>
                                                     <DatePicker
                                                         className='m-2'
                                                         selected={this.state.createdDate}
                                                         onChange={this.onChangeCreatedDate}
-                                                    />
-                                                </div><p className="validateMsg">{this.state.createdDateError}</p>
+                                                    /><p className="font-bold text-red-600 validateMsg">{this.state.createdDateError}</p>
+                                                </div>
                                             </div>
 
                                             <div className="grid grid-cols-2 gap-4 form-group">
@@ -216,8 +216,8 @@ export class CreatePass extends Component {
                                                             value={this.state.trainClass}
                                                             onChange={this.onChangeTrainClass}
                                                         /><p />
-                                                    </div>
-                                                </div><p className="validateMsg">{this.state.trainClassError}</p>
+                                                    </div><p className="font-bold text-red-600 validateMsg">{this.state.trainClassError}</p>
+                                                </div>
                                                 <div className="form-group">
                                                     <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Valid Months : </label>
                                                     <select
@@ -228,13 +228,13 @@ export class CreatePass extends Component {
                                                         value={this.state.validMonths}
                                                         onChange={this.onChangeValidMonths}
                                                     >
-                                                        <option>Select number of months</option>
+                                                        <option value={null} >Select number of months</option>
                                                         <option>1 Month</option>
                                                         <option>3 Month</option>
                                                         <option>6 Month</option>
                                                         <option>1 Year</option>
-                                                    </select>
-                                                </div><p className="validateMsg">{this.state.validMonthsError}</p>
+                                                    </select><p className="font-bold text-red-600 validateMsg">{this.state.validMonthsError}</p>
+                                                </div>
                                             </div>
                                             <div className="grid grid-cols-2 gap-4 form-group">
                                                 <div class="">
@@ -247,8 +247,8 @@ export class CreatePass extends Component {
                                                             value={this.state.fromStation}
                                                             onChange={this.onChangeFromStation}
                                                         /><p />
-                                                    </div>
-                                                </div><p className="validateMsg">{this.state.fromStationError}</p>
+                                                    </div><p className="font-bold text-red-600 validateMsg">{this.state.fromStationError}</p>
+                                                </div>
                                                 <div class="">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >To Station : </label>
                                                     <div>
@@ -259,8 +259,8 @@ export class CreatePass extends Component {
                                                             value={this.state.toStation}
                                                             onChange={this.onChangeToStation}
                                                         /><p />
-                                                    </div>
-                                                </div><p className="validateMsg">{this.state.toStationError}</p>
+                                                    </div><p className="font-bold text-red-600 validateMsg">{this.state.toStationError}</p>
+                                                </div>
                                             </div>
                                             <div className="text-center align-middle form-group">
                                                 <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Create Season Pass" />
