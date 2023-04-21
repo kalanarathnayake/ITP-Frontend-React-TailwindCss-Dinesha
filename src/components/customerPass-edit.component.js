@@ -103,6 +103,32 @@ export default class EditPass extends Component {
             createdDate: this.state.createdDate,
         }
 
+        //Validations
+        if (this.state.firstName.length < 4) {
+            this.setState({ firstNameError: "FirstName is too short" })
+        }
+        if (this.state.lastName.length < 4) {
+            this.setState({ lastNameError: "LastName is too short" })
+        }
+        if (this.state.nic.length < 9) {
+            this.setState({ nicError: "NIC is too short" })
+        }
+        if (this.state.validMonths.length < 4) {
+            this.setState({ validMonthsError: "Valid Months is too short" })
+        }
+        if (this.state.trainClass.length < 4) {
+            this.setState({ trainClassError: "Train Class name is too short" })
+        }
+        if (this.state.fromStation.length < 4) {
+            this.setState({ fromStationError: "fromStation is too short" })
+        }
+        if (this.state.toStation.length < 4) {
+            this.setState({ toStationError: "Station name is too short" })
+        }
+        if (this.state.createdDate.length < 4) {
+            this.setState({ createdDateError: "Station name is too short" })
+        }
+
         console.log(pass);
         console.log(this.props.passId);
         axios.put('http://localhost:5000/pass/' + this.props.passId, pass)
@@ -157,7 +183,7 @@ export default class EditPass extends Component {
                                                         value={this.state.firstName}
                                                         onChange={this.onChangeFirstName}
                                                     /><p />
-                                                </div>
+                                                </div><p className="validateMsg">{this.state.firstNameError}</p>
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Last Name : </label>
                                                     <input type="text"
@@ -167,7 +193,7 @@ export default class EditPass extends Component {
                                                         value={this.state.lastName}
                                                         onChange={this.onChangeLastName}
                                                     /><p />
-                                                </div>
+                                                </div><p className="validateMsg">{this.state.lastNameError}</p>
                                             </div>
                                             <div className="grid grid-cols-2 gap-4 form-group">
 
@@ -182,7 +208,7 @@ export default class EditPass extends Component {
                                                             onChange={this.onChangeNic}
                                                         /><p />
                                                     </div>
-                                                </div>
+                                                </div><p className="validateMsg">{this.state.nicError}</p>
                                                 <div class="">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >Created Date : </label>
                                                     <DatePicker
@@ -190,7 +216,7 @@ export default class EditPass extends Component {
                                                         selected={this.state.createdDate}
                                                         onChange={this.onChangeCreatedDate}
                                                     />
-                                                </div>
+                                                </div><p className="validateMsg">{this.state.createdDateError}</p>
                                             </div>
 
                                             <div className="grid grid-cols-2 gap-4 form-group">
@@ -206,7 +232,7 @@ export default class EditPass extends Component {
                                                             onChange={this.onChangeTrainClass}
                                                         /><p />
                                                     </div>
-                                                </div>
+                                                </div><p className="validateMsg">{this.state.trainClassError}</p>
                                                 <div className="form-group">
                                                     <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Valid Months : </label>
                                                     <select
@@ -224,7 +250,7 @@ export default class EditPass extends Component {
                                                         <option>6 Month</option>
                                                         <option>1 Year</option>
                                                     </select>
-                                                </div>
+                                                </div><p className="validateMsg">{this.state.validMonthsError}</p>
                                             </div>
                                             <div className="grid grid-cols-2 gap-4 form-group">
                                                 <div class="">
@@ -239,7 +265,7 @@ export default class EditPass extends Component {
                                                             onChange={this.onChangeFromStation}
                                                         /><p />
                                                     </div>
-                                                </div>
+                                                </div><p className="validateMsg">{this.state.fromStationError}</p>
                                                 <div class="">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >To Station : </label>
                                                     <div>
@@ -252,7 +278,7 @@ export default class EditPass extends Component {
                                                             onChange={this.onChangeToStation}
                                                         /><p />
                                                     </div>
-                                                </div>
+                                                </div><p className="validateMsg">{this.state.toStationError}</p>
                                             </div>
                                             <div className="text-center align-middle form-group">
                                                 <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Update Season Pass" />
